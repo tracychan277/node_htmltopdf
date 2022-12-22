@@ -19,9 +19,6 @@ router.get('/pdf', async (req, res) => {
     function(error, html) {
       var config = {
         format: "A4",
-        orientation: "portrait",
-        timeout: 100000,
-        phantomArgs: ["--web-security=false","--local-to-remote-url-access=true"]
       };
       pdf.create(html, config).toStream((err, pdfStream) => {
         if (err) {
