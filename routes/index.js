@@ -6,14 +6,16 @@ var pdf = require('html-pdf');
 router.get('/', function(req, res, next) {
   const data = require('../response.json');
   const { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory } = data;
-  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory });
+  const date = new Date().toLocaleDateString('en-au', { day: 'numeric', month: 'short', year: 'numeric' });
+  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date });
 });
 
 router.get('/pdf', async (req, res) => {
   const data = require('../response.json');
   const { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory } = data;
+  const date = new Date().toLocaleDateString('en-au', { day: 'numeric', month: 'short', year: 'numeric' });
   res.render(
-    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory },
+    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date },
     function(error, html) {
       var config = {
         format: "A4",
