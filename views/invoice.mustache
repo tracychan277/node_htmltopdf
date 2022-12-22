@@ -89,10 +89,6 @@
 				font-weight: bold;
 			}
 
-			.invoice-box table tr.details td {
-				padding-bottom: 20px;
-			}
-
 			.invoice-box table tr.item td {
 				border-bottom: 1px solid #eee;
 			}
@@ -101,9 +97,10 @@
 				border-bottom: none;
 			}
 
-			.invoice-box table tr.total td:nth-child(2) {
+			.invoice-box table tr.total td {
 				border-top: 2px solid #eee;
 				font-weight: bold;
+                padding-bottom: 20px;
 			}
 
 			@media only screen and (max-width: 600px) {
@@ -180,7 +177,7 @@
                     <td>A ${{ totalInterestEarnedInAud }}</td>
                 </tr>
 
-                <tr class="details">
+                <tr class="total">
                     <td>Total gains/losses</td>
                     <td>A ${{ totalGainLoss }}</td>
                 </tr>
