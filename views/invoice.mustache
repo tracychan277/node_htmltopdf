@@ -163,23 +163,23 @@
 				</tr>
 
                 <tr class="details">
-                    <td>Total AUD deposits</td>
+                    <td>Total deposits</td>
                     <td>A ${{ totalFiatDeposits }}</td>
                 </tr>
 
                 <tr class="details">
-                    <td>Total AUD withdrawals</td>
-                    <td>A ${{ totalFiatWithdrawals }}</td>
+                    <td>Total withdrawals</td>
+                    <td>A ${{#totalFiatWithdrawals}}{{ audFormat }}{{/totalFiatWithdrawals}}</td>
                 </tr>
 
                 <tr class="details">
                     <td>Total interest earned</td>
-                    <td>A ${{ totalInterestEarnedInAud }}</td>
+                    <td>A ${{#totalInterestEarnedInAud}}{{ audFormat }}{{/totalInterestEarnedInAud}}</td>
                 </tr>
 
                 <tr class="total">
                     <td>Total gains/losses</td>
-                    <td>A ${{ totalGainLoss }}</td>
+                    <td>A ${{#totalGainLoss}}{{ audFormat }}{{/totalGainLoss}}</td>
                 </tr>
 
                 <tr class="heading">

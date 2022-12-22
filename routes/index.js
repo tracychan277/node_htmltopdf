@@ -11,14 +11,18 @@ const dateFormat = function () {
   return new Date(this).toLocaleString('en-au', { dateStyle: 'short', timeStyle: 'short' });
 };
 
+const audFormat = function () {
+  return Number(this).toFixed(2);
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat });
+  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat, audFormat });
 });
 
 router.get('/pdf', async (req, res) => {
   res.render(
-    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat },
+    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat, audFormat },
     function(error, html) {
       var config = {
         format: "A4",
