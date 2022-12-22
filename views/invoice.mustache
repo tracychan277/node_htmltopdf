@@ -193,7 +193,7 @@
 
                 {{#transactions}}
                     <tr class="details">
-                        <td>{{ at }} {{ type }}</td>
+                        <td>{{#at}}{{ dateFormat }}{{/at}} {{ type }}</td>
                         <td>{{ currencyCode }} {{ amount }}</td>
                     </tr>
                 {{/transactions}}

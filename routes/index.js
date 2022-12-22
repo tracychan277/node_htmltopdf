@@ -2,23 +2,32 @@ var express = require('express');
 var router = express.Router();
 var pdf = require('html-pdf');
 
+const data = require('../response.json');
+const { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory } = data;
+
+const date = new Date().toLocaleDateString('en-au', { day: 'numeric', month: 'short', year: 'numeric' });
+
+const dateFormat = function () {
+  return new Date(this).toLocaleString('en-au', { dateStyle: 'short', timeStyle: 'short' });
+};
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  const data = require('../response.json');
-  const { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory } = data;
-  const date = new Date().toLocaleDateString('en-au', { day: 'numeric', month: 'short', year: 'numeric' });
-  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date });
+  res.render('invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat });
 });
 
 router.get('/pdf', async (req, res) => {
-  const data = require('../response.json');
-  const { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory } = data;
-  const date = new Date().toLocaleDateString('en-au', { day: 'numeric', month: 'short', year: 'numeric' });
   res.render(
-    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date },
+    'invoice', { transactions, totalFiatDeposits, totalCryptoDeposits, totalInterestEarned, totalInterestEarnedInAud, totalFiatWithdrawals, totalCryptoWithdrawals, totalGainLoss, transactionHistory, date, dateFormat },
     function(error, html) {
       var config = {
         format: "A4",
+        footer: {
+          height: '20mm',
+          contents: {
+            default: '{{page}} of {{pages}}',
+          },
+        },
       };
       pdf.create(html, config).toStream((err, pdfStream) => {
         if (err) {
